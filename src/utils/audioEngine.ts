@@ -18,7 +18,7 @@ export class VocalAudioEngine {
       this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
       this.masterGain = this.audioContext.createGain();
       this.masterGain.connect(this.audioContext.destination);
-      this.masterGain.gain.setValueAtTime(0.3, this.audioContext.currentTime); // Master volume
+      this.masterGain.gain.setValueAtTime(0.5, this.audioContext.currentTime); // Default master volume
       this.isInitialized = true;
       
       // Resume context if suspended (required by some browsers)
@@ -56,6 +56,26 @@ export class VocalAudioEngine {
       voice.stop();
     });
     this.currentVoices.clear();
+  }
+
+  setMasterVolume(volume: number): void {
+    if (!this.isInitialized || !this.masterGain) return;
+    
+    // Clamp volume between 0 and 1
+    const clampedVolume = Math.max(0, Math.min(1, volume));
+    
+    // Apply smooth transition to avoid clicks
+    const now = this.audioContext.currentTime;
+    const transitionTime = 0.05; // 50ms smooth transition
+    
+    this.masterGain.gain.cancelScheduledValues(now);
+    this.masterGain.gain.setValueAtTime(this.masterGain.gain.value, now);
+    this.masterGain.gain.linearRampToValueAtTime(clampedVolume, now + transitionTime);
+  }
+
+  getMasterVolume(): number {
+    if (!this.isInitialized || !this.masterGain) return 0.5;
+    return this.masterGain.gain.value;
   }
 
   destroy(): void {

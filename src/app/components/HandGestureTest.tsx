@@ -407,6 +407,17 @@ export default function HandGestureTracker() {
     }
   }, [currentHarmony]);
   
+  // Apply volume control from volume hand
+  useEffect(() => {
+    try {
+      // Use detected volume hand position, fallback to default 50%
+      const targetVolume = volumeHand.detected ? currentVolume : 0.5;
+      audioEngine.setMasterVolume(targetVolume);
+    } catch (err) {
+      console.error('Failed to set audio volume:', err);
+    }
+  }, [volumeHand.detected, currentVolume]);
+  
   // Trigger harmonization when control hand position changes
   useEffect(() => {
     if (controlHand.detected && harmonizerReady && controlHand.vowel !== 'NONE') {
