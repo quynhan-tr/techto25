@@ -4,7 +4,6 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useHarmonizer } from '../../hooks/useHarmonizer';
 import { audioEngine } from '../../utils/audioEngine';
 import { midiToNoteName } from '../../types/harmonizer';
-import type { HarmonyChord } from '../../types/harmonizer';
 
 type HandPreference = 'left' | 'right' | null;
 

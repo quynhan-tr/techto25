@@ -7,15 +7,15 @@ export class VocalAudioEngine {
 
   constructor() {
     // AudioContext will be created lazily on first user interaction
-    this.audioContext = null as any;
-    this.masterGain = null as any;
+    this.audioContext = null!;
+    this.masterGain = null!;
   }
 
   async initialize(): Promise<void> {
     if (this.isInitialized) return;
 
     try {
-      this.audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      this.audioContext = new (window.AudioContext || (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext!)();
       this.masterGain = this.audioContext.createGain();
       this.masterGain.connect(this.audioContext.destination);
       this.masterGain.gain.setValueAtTime(0.5, this.audioContext.currentTime); // Default master volume
@@ -134,7 +134,7 @@ class VocalVoice {
   private setupVocalFilter(voiceType: string): void {
     // Set different formant frequencies for different voice types
     let filterFreq: number;
-    let filterQ = 2.0;
+    const filterQ = 2.0;
 
     switch (voiceType) {
       case 'soprano':

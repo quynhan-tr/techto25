@@ -5,6 +5,7 @@ import {
   HarmonyChord, 
   HarmonySequence,
   MelodyNote,
+  HarmonizerNote,
   midiToNoteName
 } from '../types/harmonizer';
 
@@ -22,6 +23,36 @@ export const useHarmonizer = () => {
 
   const workerRef = useRef<Worker | null>(null);
   const sequenceRef = useRef<HarmonySequence | null>(null);
+
+  // Handle received harmony from worker
+  const handleHarmonyReceived = useCallback((notes: HarmonizerNote[]) => {
+    if (notes.length < 4) return;
+
+    const [soprano, alto, tenor, bass] = notes;
+    const newChord: HarmonyChord = {
+      soprano,
+      alto,
+      tenor,
+      bass
+    };
+
+    // Always update current harmony for real-time display
+    setCurrentHarmony(newChord);
+
+    // Also add to current sequence if not in real-time mode
+    if (!isRealTimeMode && sequenceRef.current) {
+      const updatedSequence = {
+        ...sequenceRef.current,
+        harmonies: [...sequenceRef.current.harmonies, newChord]
+      };
+      sequenceRef.current = updatedSequence;
+      
+      setState(prev => ({
+        ...prev,
+        currentSequence: updatedSequence
+      }));
+    }
+  }, [isRealTimeMode]);
 
   // Initialize the harmonizer worker
   useEffect(() => {
@@ -76,37 +107,7 @@ export const useHarmonizer = () => {
         workerRef.current.terminate();
       }
     };
-  }, []);
-
-  // Handle received harmony from worker
-  const handleHarmonyReceived = useCallback((notes: any[]) => {
-    if (notes.length < 4) return;
-
-    const [soprano, alto, tenor, bass] = notes;
-    const newChord: HarmonyChord = {
-      soprano,
-      alto, 
-      tenor,
-      bass
-    };
-
-    // Always update current harmony for real-time display
-    setCurrentHarmony(newChord);
-
-    // Also add to current sequence if not in real-time mode
-    if (!isRealTimeMode && sequenceRef.current) {
-      const updatedSequence = {
-        ...sequenceRef.current,
-        harmonies: [...sequenceRef.current.harmonies, newChord]
-      };
-      sequenceRef.current = updatedSequence;
-      
-      setState(prev => ({
-        ...prev,
-        currentSequence: updatedSequence
-      }));
-    }
-  }, [isRealTimeMode]);
+  }, [handleHarmonyReceived]);
 
   // Start a new harmony sequence
   const startNewSequence = useCallback((title: string = 'New Harmony') => {
