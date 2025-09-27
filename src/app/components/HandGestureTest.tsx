@@ -600,15 +600,15 @@ export default function HandGestureTracker() {
         
         {/* Main Content Area */}
         <div className="flex-1 flex items-center justify-center gap-6">
-          {/* Camera Feed - Much Larger */}
-          <div className="relative bg-white/5 backdrop-blur-2xl rounded-[2rem] overflow-hidden w-full max-w-5xl aspect-video border border-white/20 shadow-2xl">
+          {/* Camera Feed - Fixed Aspect Ratio */}
+          <div className="relative bg-white/5 backdrop-blur-2xl rounded-[2rem] overflow-hidden w-full max-w-4xl aspect-[4/3] border border-white/20 shadow-2xl">
             {/* Liquid glass overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-blue-400/10 to-violet-400/5 z-10 pointer-events-none"></div>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse z-10 pointer-events-none"></div>
             
             <video
               ref={videoRef}
-              className="absolute inset-0 w-full h-full object-cover rounded-[2rem]"
+              className="absolute inset-0 w-full h-full object-contain rounded-[2rem]"
               style={{ transform: 'scaleX(-1)' }}
               playsInline
               muted
