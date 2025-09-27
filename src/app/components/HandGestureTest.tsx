@@ -675,15 +675,88 @@ export default function HandGestureTracker() {
             <div className="p-6 bg-white/10 backdrop-blur-2xl rounded-[1.5rem] border border-white/20 relative overflow-hidden shadow-xl">
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 via-teal-400/8 to-cyan-400/5"></div>
               <div className="relative text-center">
-                <div className="text-white/60 text-sm font-light mb-3">Volume</div>
-                <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden mb-2">
-                  <div 
-                    className="h-full bg-gradient-to-r from-cyan-400 to-blue-400 transition-all duration-300 rounded-full"
-                    style={{ width: `${volumeHand.detected ? (currentVolume * 100) : 50}%` }}
-                  ></div>
+                <div className="text-white/60 text-sm font-light mb-3 flex items-center justify-center gap-2">
+                  <span className="text-lg">🔊</span>
+                  Volume
                 </div>
-                <div className="text-sm font-light text-white/80">
-                  {volumeHand.detected ? `${(currentVolume * 100).toFixed(0)}%` : '50%'}
+                
+                {/* Enhanced Volume Bar */}
+                <div className="relative w-full h-4 bg-white/10 rounded-full overflow-hidden mb-3 shadow-inner">
+                  {/* Background glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-blue-500/20 to-cyan-500/20 rounded-full"></div>
+                  
+                  {/* Animated volume fill */}
+                  <div 
+                    className={`h-full transition-all duration-500 ease-out rounded-full relative overflow-hidden ${
+                      volumeHand.detected 
+                        ? currentVolume < 0.3 
+                          ? 'bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400' 
+                          : currentVolume < 0.7 
+                          ? 'bg-gradient-to-r from-yellow-400 via-green-400 to-cyan-400' 
+                          : 'bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400'
+                        : 'bg-gradient-to-r from-gray-400 to-gray-500'
+                    }`}
+                    style={{ width: `${volumeHand.detected ? (currentVolume * 100) : 50}%` }}
+                  >
+                    {/* Shimmer effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse"></div>
+                    
+                    {/* Volume level indicator dot */}
+                    {volumeHand.detected && currentVolume > 0.05 && (
+                      <div className="absolute right-1 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-white rounded-full shadow-lg animate-pulse"></div>
+                    )}
+                  </div>
+                  
+                  {/* Volume level markers */}
+                  <div className="absolute inset-0 flex items-center justify-between px-1">
+                    {[0.25, 0.5, 0.75].map((marker, index) => (
+                      <div 
+                        key={index}
+                        className={`w-0.5 h-2 rounded-full transition-colors duration-300 ${
+                          (volumeHand.detected ? currentVolume : 0.5) >= marker 
+                            ? 'bg-white/60' 
+                            : 'bg-white/20'
+                        }`}
+                        style={{ left: `${marker * 100}%` }}
+                      />
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Volume percentage with dynamic styling */}
+                <div className="flex items-center justify-center gap-2">
+                  <div className={`text-lg font-light transition-colors duration-300 ${
+                    volumeHand.detected 
+                      ? currentVolume < 0.3 
+                        ? 'text-red-300' 
+                        : currentVolume < 0.7 
+                        ? 'text-yellow-300' 
+                        : 'text-cyan-300'
+                      : 'text-white/60'
+                  }`}>
+                    {volumeHand.detected ? `${(currentVolume * 100).toFixed(0)}%` : '50%'}
+                  </div>
+                  
+                  {/* Dynamic volume icon based on level */}
+                  <div className="text-xs">
+                    {volumeHand.detected ? (
+                      currentVolume < 0.1 ? '🔇' :
+                      currentVolume < 0.3 ? '🔉' :
+                      currentVolume < 0.7 ? '🔊' : '📢'
+                    ) : '🔊'}
+                  </div>
+                </div>
+                
+                {/* Volume status indicator */}
+                <div className="mt-2 text-xs text-white/40">
+                  {volumeHand.detected ? (
+                    <span className="flex items-center justify-center gap-1">
+                      <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
+                      Hand detected
+                    </span>
+                  ) : (
+                    'Default volume'
+                  )}
                 </div>
               </div>
             </div>
