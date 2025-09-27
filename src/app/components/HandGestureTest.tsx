@@ -4,6 +4,34 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 
 type HandPreference = 'left' | 'right' | null;
 
+interface MediaPipeHands {
+  send: (input: { image: HTMLVideoElement }) => Promise<void>;
+  setOptions: (options: {
+    maxNumHands: number;
+    modelComplexity: number;
+    minDetectionConfidence: number;
+    minTrackingConfidence: number;
+  }) => void;
+  onResults: (callback: (results: HandResults) => void) => void;
+}
+
+interface Landmark {
+  x: number;
+  y: number;
+  z?: number;
+}
+
+interface HandResults {
+  multiHandLandmarks?: Landmark[][];
+  multiHandedness?: Array<{ label: string }>;
+}
+
+declare global {
+  interface Window {
+    Hands: new (options: { locateFile: (file: string) => string }) => MediaPipeHands;
+  }
+}
+
 interface HandPosition {
   x: number; // 0-1, left to right
   y: number; // 0-1, top to bottom (inverted for pitch)
@@ -19,7 +47,7 @@ interface VolumeHand {
 export default function HandGestureTracker() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const handsRef = useRef<any>(null);
+  const handsRef = useRef<MediaPipeHands | null>(null);
   
   // All hooks must be declared before any conditional returns
   const [handPreference, setHandPreference] = useState<HandPreference>(null);
@@ -85,7 +113,7 @@ export default function HandGestureTracker() {
 
 
   // Detect vowel based on hand gesture
-  const detectVowel = useCallback((landmarks: any[]): 'A' | 'O' | 'NONE' => {
+  const detectVowel = useCallback((landmarks: Landmark[]): 'A' | 'O' | 'NONE' => {
     if (!landmarks || landmarks.length < 21) return 'NONE';
     
     // Check for open palm (A) - all fingers extended
@@ -106,7 +134,7 @@ export default function HandGestureTracker() {
     return 'NONE'; // Unclear gesture
   }, []);
 
-  const onResults = useCallback((results: any) => {
+  const onResults = useCallback((results: HandResults) => {
     if (!canvasRef.current || !videoRef.current) return;
     
     const canvas = canvasRef.current;
@@ -120,11 +148,11 @@ export default function HandGestureTracker() {
     
 
     if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-      let controlHandData = null;
-      let volumeHandData = null;
+      let controlHandData: HandPosition | null = null;
+      let volumeHandData: VolumeHand | null = null;
 
       // Process each detected hand
-      results.multiHandLandmarks.forEach((landmarks: any, handIndex: number) => {
+      results.multiHandLandmarks.forEach((landmarks: Landmark[], handIndex: number) => {
         const handedness = results.multiHandedness?.[handIndex]?.label || 'Unknown';
         const isRightHand = handedness === 'Right';
         const isLeftHand = handedness === 'Left';
@@ -137,7 +165,7 @@ export default function HandGestureTracker() {
                              (handPreference === 'left' && isLeftHand);
 
         // Draw hand landmarks with different colors
-        landmarks.forEach((landmark: any, index: number) => {
+        landmarks.forEach((landmark: Landmark, index: number) => {
           const x = landmark.x * canvas.width;
           const y = landmark.y * canvas.height;
           
@@ -209,7 +237,7 @@ export default function HandGestureTracker() {
         setControlHand(controlHandData);
         
         // Draw pitch indicator line across full width
-        const pitchY = controlHandData.y * canvas.height;
+        const pitchY = (controlHandData as HandPosition).y * canvas.height;
         ctx.strokeStyle = '#FFD700'; // Gold color for pitch indicator
         ctx.lineWidth = 4;
         ctx.beginPath();
@@ -218,12 +246,12 @@ export default function HandGestureTracker() {
         ctx.stroke();
 
         // Draw vowel indicator in center
-        if (controlHandData.vowel !== 'NONE') {
+        if ((controlHandData as HandPosition).vowel !== 'NONE') {
           ctx.font = 'bold 48px Arial';
           ctx.fillStyle = '#FFD700';
           ctx.strokeStyle = 'white';
           ctx.lineWidth = 4;
-          const vowelText = controlHandData.vowel;
+          const vowelText = (controlHandData as HandPosition).vowel;
           const textWidth = ctx.measureText(vowelText).width;
           const textX = (canvas.width - textWidth) / 2;
           const textY = pitchY - 30;
@@ -245,7 +273,7 @@ export default function HandGestureTracker() {
       setControlHand(prev => ({ ...prev, detected: false, vowel: 'NONE' }));
       setVolumeHand(prev => ({ ...prev, detected: false }));
     }
-  }, [detectVowel, handPreference, getVolumeFromY, getPitchFromY]);
+  }, [detectVowel, handPreference]);
 
   useEffect(() => {
     const initializeCamera = async () => {
@@ -283,7 +311,7 @@ export default function HandGestureTracker() {
           console.log('MediaPipe loaded successfully');
           
           // Initialize MediaPipe Hands
-          const hands = new (window as any).Hands({
+          const hands = new window.Hands({
             locateFile: (file: string) => {
               return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
             }
@@ -438,7 +466,7 @@ export default function HandGestureTracker() {
             <h1 className="text-4xl font-light text-rose-300 mb-4 tracking-tight drop-shadow-lg">Error</h1>
             <p className="text-white/80 font-light text-lg mb-4">{error}</p>
             <p className="text-sm text-white/60 font-light mb-8">
-              Make sure you've granted camera permissions and are using HTTPS
+              Make sure you&apos;ve granted camera permissions and are using HTTPS
             </p>
             <button 
               onClick={() => setHandPreference(null)}
