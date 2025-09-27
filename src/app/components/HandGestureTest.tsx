@@ -134,10 +134,14 @@ export default function HandGestureTracker() {
       { tip: landmarks[20], pip: landmarks[18] }  // Pinky
     ];
     
-    const extendedFingers = fingers.filter(finger => finger.tip.y < finger.pip.y).length;
+    // Filter out any undefined landmarks before processing
+    const validFingers = fingers.filter(finger => finger.tip && finger.pip);
+    if (validFingers.length < 3) return 'NONE'; // Need at least 3 valid fingers
+    
+    const extendedFingers = validFingers.filter(finger => finger.tip.y < finger.pip.y).length;
     
     // Check for fist (O) - all fingers folded
-    const foldedFingers = fingers.filter(finger => finger.tip.y > finger.pip.y).length;
+    const foldedFingers = validFingers.filter(finger => finger.tip.y > finger.pip.y).length;
     
     if (extendedFingers >= 3) return 'A'; // Open palm
     if (foldedFingers >= 3) return 'O';   // Fist
@@ -225,20 +229,24 @@ export default function HandGestureTracker() {
         });
 
         // Store hand data
-        if (isControlHand) {
+        if (isControlHand && landmarks.length > 8) {
           const indexTip = landmarks[8];
-          controlHandData = {
-            x: indexTip.x,
-            y: indexTip.y,
-            detected: true,
-            vowel: detectVowel(landmarks)
-          };
-        } else if (isVolumeHand) {
+          if (indexTip) {
+            controlHandData = {
+              x: indexTip.x,
+              y: indexTip.y,
+              detected: true,
+              vowel: detectVowel(landmarks)
+            };
+          }
+        } else if (isVolumeHand && landmarks.length > 8) {
           const indexTip = landmarks[8];
-          volumeHandData = {
-            y: indexTip.y,
-            detected: true
-          };
+          if (indexTip) {
+            volumeHandData = {
+              y: indexTip.y,
+              detected: true
+            };
+          }
         }
       });
 
