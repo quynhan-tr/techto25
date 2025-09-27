@@ -351,65 +351,68 @@ export default function HandGestureTracker() {
   // Hand preference selection page
   if (handPreference === null) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-black flex items-center justify-center relative overflow-hidden">
-        {/* Gradient orb background */}
+      <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-slate-900 to-violet-950 flex items-center justify-center relative overflow-hidden">
+        {/* Liquid glass background orbs */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-orange-400/20 via-red-400/10 to-transparent rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-gradient-to-br from-blue-500/15 via-purple-500/10 to-transparent rounded-full blur-3xl"></div>
-          <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-br from-pink-400/10 via-orange-300/10 to-transparent rounded-full blur-2xl"></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-cyan-400/25 via-blue-400/15 to-indigo-400/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-gradient-to-br from-violet-400/20 via-purple-400/12 to-pink-400/8 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+          <div className="absolute top-1/2 right-1/3 w-72 h-72 bg-gradient-to-br from-emerald-400/15 via-teal-400/10 to-cyan-400/8 rounded-full blur-2xl animate-pulse" style={{animationDelay: '4s'}}></div>
         </div>
         
-        {/* Grain texture overlay */}
-        <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.15)_1px,transparent_0)] bg-[length:4px_4px]"></div>
+        {/* Liquid glass shimmer overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-pulse opacity-80"></div>
         
-        <div className="relative z-10 text-center p-12 bg-black/20 backdrop-blur-xl rounded-3xl shadow-2xl max-w-lg border border-white/10">
-          <h1 className="text-5xl font-light text-white mb-3 tracking-tight">
-            Motion
-            <br />
-            <span className="font-normal bg-gradient-to-r from-orange-300 to-red-300 bg-clip-text text-transparent">Wave</span>
-          </h1>
-          <p className="text-gray-300 mb-10 text-lg font-light">Choose your dominant hand for gesture control</p>
-          
-          <div className="space-y-4">
-            <button
-              onClick={() => setHandPreference('right')}
-              className="group w-full p-8 bg-gradient-to-r from-orange-500/20 to-red-500/20 hover:from-orange-500/30 hover:to-red-500/30 backdrop-blur-sm border border-orange-400/20 hover:border-orange-400/40 text-white rounded-2xl font-light text-xl transition-all duration-300 transform hover:scale-[1.02] shadow-xl relative overflow-hidden"
-            >
-              {/* Button grain overlay */}
-              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[length:3px_3px]"></div>
-              <div className="relative flex items-center justify-center space-x-4">
-                <span className="text-3xl opacity-80">👋</span>
-                <div className="text-left">
-                  <div className="text-xl">Right Handed</div>
-                  <div className="text-sm opacity-60 font-light">Right hand controls gesture detection</div>
-                </div>
-              </div>
-            </button>
+        <div className="relative z-10 text-center p-12 bg-white/10 backdrop-blur-2xl rounded-[2.5rem] shadow-2xl max-w-lg border border-white/20">
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-blue-400/10 to-violet-400/5 rounded-[2.5rem]"></div>
+          <div className="relative">
+            <h1 className="text-5xl font-light text-white mb-3 tracking-tight drop-shadow-lg">
+              Motion
+              <br />
+              <span className="font-normal bg-gradient-to-r from-cyan-300 via-blue-300 to-violet-300 bg-clip-text text-transparent">Wave</span>
+            </h1>
+            <p className="text-white/80 mb-10 text-lg font-light">Choose your dominant hand for gesture control</p>
             
-            <button
-              onClick={() => setHandPreference('left')}
-              className="group w-full p-8 bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 backdrop-blur-sm border border-blue-400/20 hover:border-blue-400/40 text-white rounded-2xl font-light text-xl transition-all duration-300 transform hover:scale-[1.02] shadow-xl relative overflow-hidden"
-            >
-              {/* Button grain overlay */}
-              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[length:3px_3px]"></div>
-              <div className="relative flex items-center justify-center space-x-4">
-                <span className="text-3xl opacity-80">🤚</span>
-                <div className="text-left">
-                  <div className="text-xl">Left Handed</div>
-                  <div className="text-sm opacity-60 font-light">Left hand controls gesture detection</div>
+            <div className="space-y-4">
+              <button
+                onClick={() => setHandPreference('right')}
+                className="group w-full p-8 bg-white/10 backdrop-blur-2xl border border-white/20 hover:border-cyan-300/50 text-white rounded-[1.5rem] font-light text-xl transition-all duration-500 transform hover:scale-[1.02] shadow-xl relative overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 via-blue-400/5 to-violet-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[1.5rem]"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-blue-400/8 to-indigo-400/5 rounded-[1.5rem]"></div>
+                <div className="relative flex items-center justify-center space-x-4">
+                  <span className="text-3xl">👋</span>
+                  <div className="text-left">
+                    <div className="text-xl">Right Handed</div>
+                    <div className="text-sm text-white/60 font-light">Right hand controls gesture detection</div>
+                  </div>
                 </div>
+              </button>
+              
+              <button
+                onClick={() => setHandPreference('left')}
+                className="group w-full p-8 bg-white/10 backdrop-blur-2xl border border-white/20 hover:border-violet-300/50 text-white rounded-[1.5rem] font-light text-xl transition-all duration-500 transform hover:scale-[1.02] shadow-xl relative overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-violet-400/10 via-purple-400/5 to-pink-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[1.5rem]"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-violet-400/5 via-purple-400/8 to-pink-400/5 rounded-[1.5rem]"></div>
+                <div className="relative flex items-center justify-center space-x-4">
+                  <span className="text-3xl">🤚</span>
+                  <div className="text-left">
+                    <div className="text-xl">Left Handed</div>
+                    <div className="text-sm text-white/60 font-light">Left hand controls gesture detection</div>
+                  </div>
+                </div>
+              </button>
+            </div>
+            
+            <div className="mt-10 p-6 bg-white/5 backdrop-blur-xl rounded-[1.5rem] border border-white/15 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 via-teal-400/8 to-cyan-400/5 rounded-[1.5rem]"></div>
+              <div className="relative">
+                <p className="text-white/80 text-sm font-light">
+                  <strong className="text-cyan-300 font-medium">Gesture Detection</strong><br/>
+                  <span className="text-white/70">• Dominant hand: Pitch and vowel gestures</span><br/>
+                  <span className="text-white/70">• Other hand: Volume control gestures</span>
+                </p>
               </div>
-            </button>
-          </div>
-          
-          <div className="mt-10 p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 relative overflow-hidden">
-            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[length:2px_2px]"></div>
-            <div className="relative">
-              <p className="text-gray-300 text-sm font-light">
-                <strong className="text-orange-300 font-medium">Gesture Detection</strong><br/>
-                <span className="opacity-80">• Dominant hand: Pitch and vowel gestures</span><br/>
-                <span className="opacity-80">• Other hand: Volume control gestures</span>
-              </p>
             </div>
           </div>
         </div>
@@ -419,29 +422,29 @@ export default function HandGestureTracker() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-black flex items-center justify-center relative overflow-hidden">
-        {/* Background gradient orbs */}
+      <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-slate-900 to-violet-950 flex items-center justify-center relative overflow-hidden">
+        {/* Liquid glass background orbs */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-gradient-to-br from-red-400/20 via-orange-400/10 to-transparent rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-gradient-to-br from-blue-500/15 via-purple-500/10 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-gradient-to-br from-red-400/20 via-rose-400/12 to-pink-400/8 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-gradient-to-br from-blue-500/15 via-indigo-500/10 to-violet-500/8 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
         </div>
         
-        {/* Grain texture overlay */}
-        <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.15)_1px,transparent_0)] bg-[length:4px_4px]"></div>
+        {/* Liquid glass shimmer overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-pulse opacity-70"></div>
         
-        <div className="relative z-10 text-center p-12 bg-black/20 backdrop-blur-xl rounded-3xl shadow-2xl max-w-lg border border-white/10">
-          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[length:3px_3px]"></div>
+        <div className="relative z-10 text-center p-12 bg-white/10 backdrop-blur-2xl rounded-[2.5rem] shadow-2xl max-w-lg border border-white/20">
+          <div className="absolute inset-0 bg-gradient-to-br from-red-400/5 via-rose-400/8 to-pink-400/5 rounded-[2.5rem]"></div>
           <div className="relative">
-            <h1 className="text-4xl font-light text-red-300 mb-4 tracking-tight">Error</h1>
-            <p className="text-gray-300 font-light text-lg mb-4">{error}</p>
-            <p className="text-sm text-gray-400 font-light mb-8">
+            <h1 className="text-4xl font-light text-rose-300 mb-4 tracking-tight drop-shadow-lg">Error</h1>
+            <p className="text-white/80 font-light text-lg mb-4">{error}</p>
+            <p className="text-sm text-white/60 font-light mb-8">
               Make sure you've granted camera permissions and are using HTTPS
             </p>
             <button 
               onClick={() => setHandPreference(null)}
-              className="px-8 py-4 bg-gradient-to-r from-orange-500/20 to-red-500/20 hover:from-orange-500/30 hover:to-red-500/30 backdrop-blur-sm border border-orange-400/20 hover:border-orange-400/40 text-white rounded-2xl font-light text-lg transition-all duration-300 transform hover:scale-[1.02] shadow-xl relative overflow-hidden"
+              className="px-8 py-4 bg-white/10 backdrop-blur-2xl border border-white/20 hover:border-rose-300/50 text-white rounded-[1.5rem] font-light text-lg transition-all duration-500 transform hover:scale-[1.02] shadow-xl relative overflow-hidden group"
             >
-              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[length:3px_3px]"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-rose-400/10 via-pink-400/5 to-red-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[1.5rem]"></div>
               <span className="relative">Back to Hand Selection</span>
             </button>
           </div>
@@ -451,52 +454,56 @@ export default function HandGestureTracker() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white relative overflow-hidden">
-      {/* Background gradient orbs */}
+    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-slate-900 to-violet-950 text-white relative overflow-hidden">
+      {/* Liquid glass background orbs */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/6 left-1/5 w-80 h-80 bg-gradient-to-br from-orange-400/15 via-red-400/10 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/6 w-96 h-96 bg-gradient-to-br from-blue-500/10 via-purple-500/5 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute top-2/3 left-1/3 w-64 h-64 bg-gradient-to-br from-pink-400/8 via-orange-300/8 to-transparent rounded-full blur-2xl"></div>
+        <div className="absolute top-1/6 left-1/5 w-96 h-96 bg-gradient-to-br from-cyan-400/20 via-blue-400/15 to-indigo-400/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/6 w-80 h-80 bg-gradient-to-br from-violet-400/15 via-purple-400/10 to-pink-400/8 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-2/3 left-1/3 w-72 h-72 bg-gradient-to-br from-emerald-400/12 via-teal-400/8 to-cyan-400/6 rounded-full blur-3xl animate-pulse" style={{animationDelay: '4s'}}></div>
+        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-br from-rose-400/10 via-pink-400/8 to-purple-400/6 rounded-full blur-2xl animate-pulse" style={{animationDelay: '6s'}}></div>
       </div>
       
-      {/* Grain texture overlay */}
-      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[length:4px_4px]"></div>
+      {/* Liquid glass shimmer overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse opacity-60"></div>
       
-      <div className="relative z-10 max-w-5xl mx-auto p-6 h-screen flex flex-col">
+      <div className="relative z-10 max-w-7xl mx-auto p-6 h-screen flex flex-col">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-4xl font-light text-white tracking-tight">
-            Motion <span className="font-normal bg-gradient-to-r from-orange-300 to-red-300 bg-clip-text text-transparent">Wave</span>
+          <h1 className="text-4xl font-light text-white tracking-tight drop-shadow-lg">
+            Motion <span className="font-normal bg-gradient-to-r from-cyan-300 via-blue-300 to-violet-300 bg-clip-text text-transparent">Wave</span>
           </h1>
           <button 
             onClick={() => setHandPreference(null)}
-            className="px-4 py-2 bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/20 hover:border-white/40 rounded-xl text-sm font-light transition-all duration-300 relative overflow-hidden"
+            className="px-6 py-3 bg-white/10 backdrop-blur-xl hover:bg-white/20 border border-white/30 hover:border-cyan-300/50 rounded-2xl text-sm font-light transition-all duration-500 relative overflow-hidden group shadow-lg hover:shadow-cyan-400/20"
           >
-            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[length:3px_3px]"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 via-blue-400/5 to-violet-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             <span className="relative">Change Hand</span>
           </button>
         </div>
         
         {isLoading && (
           <div className="flex-1 flex items-center justify-center">
-            <div className="p-8 bg-black/20 backdrop-blur-xl rounded-3xl border border-white/10 relative overflow-hidden">
-              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[length:3px_3px]"></div>
+            <div className="p-10 bg-white/10 backdrop-blur-2xl rounded-[2rem] border border-white/20 relative overflow-hidden shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-blue-400/10 to-violet-400/5"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
               <div className="relative text-center">
-                <div className="inline-block animate-spin rounded-full h-10 w-10 border-2 border-orange-400/30 border-t-orange-400 mb-4"></div>
-                <p className="text-gray-300 font-light text-lg">Initializing camera and hand tracking...</p>
+                <div className="inline-block animate-spin rounded-full h-12 w-12 border-2 border-cyan-400/30 border-t-cyan-400 mb-6 shadow-lg"></div>
+                <p className="text-white/90 font-light text-lg">Initializing camera and hand tracking...</p>
               </div>
             </div>
           </div>
         )}
         
-        {/* Centered Camera Feed */}
-        <div className="flex-1 flex items-center justify-center">
-          <div className="relative bg-black/40 backdrop-blur-sm rounded-3xl overflow-hidden w-full max-w-4xl aspect-video border border-white/10 shadow-2xl">
-            {/* Grain overlay on video */}
-            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.1)_1px,transparent_0)] bg-[length:3px_3px] z-20 pointer-events-none"></div>
+        {/* Main Content Area */}
+        <div className="flex-1 flex items-center justify-center gap-6">
+          {/* Camera Feed - Much Larger */}
+          <div className="relative bg-white/5 backdrop-blur-2xl rounded-[2rem] overflow-hidden w-full max-w-5xl aspect-video border border-white/20 shadow-2xl">
+            {/* Liquid glass overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-blue-400/10 to-violet-400/5 z-10 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse z-10 pointer-events-none"></div>
             
             <video
               ref={videoRef}
-              className="absolute inset-0 w-full h-full object-cover rounded-3xl"
+              className="absolute inset-0 w-full h-full object-cover rounded-[2rem]"
               style={{ transform: 'scaleX(-1)' }}
               playsInline
               muted
@@ -505,9 +512,67 @@ export default function HandGestureTracker() {
               ref={canvasRef}
               width={640}
               height={480}
-              className="relative z-10 w-full h-full rounded-3xl"
+              className="relative z-20 w-full h-full rounded-[2rem]"
               style={{ transform: 'scaleX(-1)' }}
             />
+          </div>
+          
+          {/* Compact Side Panel */}
+          <div className="w-56 space-y-3">
+            {/* Current Note Display */}
+            <div className="p-6 bg-white/10 backdrop-blur-2xl rounded-[1.5rem] border border-white/20 relative overflow-hidden shadow-xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-blue-400/8 to-violet-400/5"></div>
+              <div className="relative text-center">
+                <div className="text-white/60 text-sm font-light mb-2">Current Note</div>
+                {controlHand.detected ? (
+                  <div className="text-3xl font-light text-white mb-2">
+                    ♪ {midiToNoteName(pitchToMidi(currentPitch))}
+                  </div>
+                ) : (
+                  <div className="text-2xl font-light text-white/40 mb-2">
+                    ♪ ---
+                  </div>
+                )}
+                <div className="text-xs text-white/50">
+                  {controlHand.detected ? `${(currentPitch * 100).toFixed(0)}%` : 'No hand detected'}
+                </div>
+              </div>
+            </div>
+            
+            {/* Volume Display */}
+            <div className="p-6 bg-white/10 backdrop-blur-2xl rounded-[1.5rem] border border-white/20 relative overflow-hidden shadow-xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 via-teal-400/8 to-cyan-400/5"></div>
+              <div className="relative text-center">
+                <div className="text-white/60 text-sm font-light mb-3">Volume</div>
+                <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden mb-2">
+                  <div 
+                    className="h-full bg-gradient-to-r from-cyan-400 to-blue-400 transition-all duration-300 rounded-full"
+                    style={{ width: `${volumeHand.detected ? (currentVolume * 100) : 50}%` }}
+                  ></div>
+                </div>
+                <div className="text-sm font-light text-white/80">
+                  {volumeHand.detected ? `${(currentVolume * 100).toFixed(0)}%` : '50%'}
+                </div>
+              </div>
+            </div>
+            
+            {/* Vowel Display */}
+            <div className="p-6 bg-white/10 backdrop-blur-2xl rounded-[1.5rem] border border-white/20 relative overflow-hidden shadow-xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-rose-400/5 via-pink-400/8 to-purple-400/5"></div>
+              <div className="relative text-center">
+                <div className="text-white/60 text-sm font-light mb-2">Vowel</div>
+                <div className={`text-2xl font-light ${
+                  controlHand.vowel === 'A' ? 'text-cyan-300' : 
+                  controlHand.vowel === 'O' ? 'text-violet-300' : 'text-white/40'
+                }`}>
+                  {controlHand.vowel !== 'NONE' ? controlHand.vowel : '---'}
+                </div>
+                <div className="text-xs text-white/50 mt-1">
+                  {controlHand.vowel === 'A' ? 'Open palm' : 
+                   controlHand.vowel === 'O' ? 'Closed fist' : 'No gesture'}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
