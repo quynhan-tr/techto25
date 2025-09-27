@@ -456,7 +456,7 @@ export default function HandGestureTracker() {
   // Hand preference selection page
   if (handPreference === null) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-slate-900 to-violet-950 flex items-center justify-center relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-slate-900 to-violet-950 flex flex-col items-center justify-center relative overflow-hidden">
         {/* Liquid glass background orbs */}
         <div className="absolute inset-0">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-cyan-400/25 via-blue-400/15 to-indigo-400/10 rounded-full blur-3xl animate-pulse"></div>
@@ -467,58 +467,30 @@ export default function HandGestureTracker() {
         {/* Liquid glass shimmer overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-pulse opacity-80"></div>
         
-        <div className="relative z-10 text-center p-12 bg-white/10 backdrop-blur-2xl rounded-[2.5rem] shadow-2xl max-w-lg border border-white/20">
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-blue-400/10 to-violet-400/5 rounded-[2.5rem]"></div>
-          <div className="relative">
-            <h1 className="text-5xl font-light text-white mb-3 tracking-tight drop-shadow-lg">
-              Motion
-              <br />
-              <span className="font-normal bg-gradient-to-r from-cyan-300 via-blue-300 to-violet-300 bg-clip-text text-transparent">Wave</span>
-            </h1>
-            <p className="text-white/80 mb-10 text-lg font-light">Choose your dominant hand for gesture control</p>
+        <div className="relative z-10 text-center max-w-md">
+          <h1 className="text-6xl font-light text-white mb-3 tracking-tight drop-shadow-lg">
+            Motion
+            <br />
+            <span className="font-normal bg-gradient-to-r from-cyan-300 via-blue-300 to-violet-300 bg-clip-text text-transparent">Wave</span>
+          </h1>
+          <p className="text-white/80 mb-16 text-lg font-light">Choose your dominant hand for gesture control</p>
+          
+          <div className="space-y-6">
+            <button
+              onClick={() => setHandPreference('right')}
+              className="w-full px-8 py-6 bg-white/10 backdrop-blur-xl hover:bg-white/20 border border-white/30 hover:border-cyan-300/50 rounded-2xl text-white text-xl font-light transition-all duration-500 relative overflow-hidden group shadow-lg hover:shadow-cyan-400/20"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 via-blue-400/5 to-violet-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <span className="relative">Right Handed</span>
+            </button>
             
-            <div className="space-y-4">
-              <button
-                onClick={() => setHandPreference('right')}
-                className="group w-full p-8 bg-white/10 backdrop-blur-2xl border border-white/20 hover:border-cyan-300/50 text-white rounded-[1.5rem] font-light text-xl transition-all duration-500 transform hover:scale-[1.02] shadow-xl relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/10 via-blue-400/5 to-violet-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[1.5rem]"></div>
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-blue-400/8 to-indigo-400/5 rounded-[1.5rem]"></div>
-                <div className="relative flex items-center justify-center space-x-4">
-                  <span className="text-3xl">👋</span>
-                  <div className="text-left">
-                    <div className="text-xl">Right Handed</div>
-                    <div className="text-sm text-white/60 font-light">Right hand controls gesture detection</div>
-                  </div>
-                </div>
-              </button>
-              
-              <button
-                onClick={() => setHandPreference('left')}
-                className="group w-full p-8 bg-white/10 backdrop-blur-2xl border border-white/20 hover:border-violet-300/50 text-white rounded-[1.5rem] font-light text-xl transition-all duration-500 transform hover:scale-[1.02] shadow-xl relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-violet-400/10 via-purple-400/5 to-pink-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[1.5rem]"></div>
-                <div className="absolute inset-0 bg-gradient-to-br from-violet-400/5 via-purple-400/8 to-pink-400/5 rounded-[1.5rem]"></div>
-                <div className="relative flex items-center justify-center space-x-4">
-                  <span className="text-3xl">🤚</span>
-                  <div className="text-left">
-                    <div className="text-xl">Left Handed</div>
-                    <div className="text-sm text-white/60 font-light">Left hand controls gesture detection</div>
-                  </div>
-                </div>
-              </button>
-            </div>
-            
-            <div className="mt-10 p-6 bg-white/5 backdrop-blur-xl rounded-[1.5rem] border border-white/15 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 via-teal-400/8 to-cyan-400/5 rounded-[1.5rem]"></div>
-              <div className="relative">
-                <p className="text-white/80 text-sm font-light">
-                  <strong className="text-cyan-300 font-medium">Gesture Detection</strong><br/>
-                  <span className="text-white/70">• Dominant hand: Pitch and vowel gestures</span><br/>
-                  <span className="text-white/70">• Other hand: Volume control gestures</span>
-                </p>
-              </div>
-            </div>
+            <button
+              onClick={() => setHandPreference('left')}
+              className="w-full px-8 py-6 bg-white/10 backdrop-blur-xl hover:bg-white/20 border border-white/30 hover:border-violet-300/50 rounded-2xl text-white text-xl font-light transition-all duration-500 relative overflow-hidden group shadow-lg hover:shadow-violet-400/20"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-violet-400/10 via-purple-400/5 to-pink-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <span className="relative">Left Handed</span>
+            </button>
           </div>
         </div>
       </div>
