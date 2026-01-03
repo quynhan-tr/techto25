@@ -259,16 +259,7 @@ export default function HandGestureTracker({ initialHandPreference }: HandGestur
       if (controlHandData) {
         setControlHand(controlHandData);
 
-        // Draw pitch indicator line across full width
-        const pitchY = (controlHandData as HandPosition).y * canvas.height;
-        ctx.strokeStyle = '#000000'; // Black for pitch line
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.setLineDash([10, 10]); // Dashed line
-        ctx.moveTo(0, pitchY);
-        ctx.lineTo(canvas.width, pitchY);
-        ctx.stroke();
-        ctx.setLineDash([]); // Reset dash
+        // REMOVED Pitch indicator line drawing here
 
         // REMOVED Vowel indicator drawing here
       } else {
