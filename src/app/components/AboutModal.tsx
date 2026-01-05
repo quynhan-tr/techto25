@@ -60,13 +60,7 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
             </p>
           </section>
 
-          <section className="pt-4 border-t border-black/10">
-            <h3 className="text-xl font-bold mb-2 not-italic underline decoration-1 underline-offset-4">Credits</h3>
-            <p className="opacity-70 text-sm leading-relaxed not-italic">
-              Powered by the original harmonizer engine from Blob Opera.
-              Licensed under GNU GPL v3.0. Hand tracking powered by Google MediaPipe.
-            </p>
-          </section>
+
         </div>
 
         {/* Footer */}
