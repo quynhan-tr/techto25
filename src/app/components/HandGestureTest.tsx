@@ -476,7 +476,7 @@ export default function HandGestureTracker({ initialHandPreference, onBack }: Ha
 
       <div className="relative z-10 max-w-7xl mx-auto p-6 h-screen flex flex-col w-full">
         {/* Header - Centered */}
-        <div className="flex items-center justify-center mb-6 relative">
+        <div className="flex items-center justify-center mb-6 mt-2 relative">
           {/* Back Button */}
           <button
             onClick={onBack}
