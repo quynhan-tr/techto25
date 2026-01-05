@@ -480,16 +480,16 @@ export default function HandGestureTracker({ initialHandPreference, onBack }: Ha
           {/* Back Button */}
           <button
             onClick={onBack}
-            className="fixed top-8 left-8 w-12 h-12 bg-black text-[#F5F5DC] rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-50"
+            className="fixed top-8 left-8 text-black p-2 hover:scale-110 transition-transform z-50 text-3xl"
             aria-label="Go back"
           >
             <svg
-              width="24"
-              height="24"
+              width="32"
+              height="32"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2.5"
+              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
