@@ -50,9 +50,10 @@ interface VolumeHand {
 
 interface HandGestureTrackerProps {
   initialHandPreference: HandPreference;
+  onBack: () => void;
 }
 
-export default function HandGestureTracker({ initialHandPreference }: HandGestureTrackerProps) {
+export default function HandGestureTracker({ initialHandPreference, onBack }: HandGestureTrackerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const handsRef = useRef<MediaPipeHands | null>(null);
@@ -475,11 +476,29 @@ export default function HandGestureTracker({ initialHandPreference }: HandGestur
 
       <div className="relative z-10 max-w-7xl mx-auto p-6 h-screen flex flex-col w-full">
         {/* Header - Centered */}
-        <div className="flex items-center justify-center mb-6">
-          <h1
-            className="text-4xl md:text-5xl tracking-tight cursor-pointer hover:opacity-80 transition-opacity duration-300"
-            onClick={() => window.location.reload()}
+        <div className="flex items-center justify-center mb-6 relative">
+          {/* Back Button */}
+          <button
+            onClick={onBack}
+            className="fixed top-8 left-8 w-12 h-12 bg-black text-[#F5F5DC] rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-50"
+            aria-label="Go back"
           >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
+
+          <h1 className="text-4xl md:text-5xl tracking-tight">
             Motion Wave
           </h1>
         </div>

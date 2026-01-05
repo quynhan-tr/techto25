@@ -11,7 +11,12 @@ export default function Home() {
   const [isAboutOpen, setIsAboutOpen] = useState(false);
 
   if (selectedHand) {
-    return <HandGestureTest initialHandPreference={selectedHand} />;
+    return (
+      <HandGestureTest
+        initialHandPreference={selectedHand}
+        onBack={() => setSelectedHand(null)}
+      />
+    );
   }
 
   return (
