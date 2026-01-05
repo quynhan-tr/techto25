@@ -480,7 +480,7 @@ export default function HandGestureTracker({ initialHandPreference, onBack }: Ha
           {/* Back Button */}
           <button
             onClick={onBack}
-            className="fixed top-8 left-8 text-black p-2 hover:scale-110 transition-transform z-50 text-3xl"
+            className="fixed top-8 left-8 text-black p-2 hover:scale-110 transition-transform z-50 text-3xl cursor-pointer"
             aria-label="Go back"
           >
             <svg
@@ -648,7 +648,7 @@ export default function HandGestureTracker({ initialHandPreference, onBack }: Ha
       {/* About Modal & Toggle Button */}
       <button
         onClick={() => setIsAboutOpen(true)}
-        className="fixed bottom-8 right-8 z-[60] w-12 h-12 bg-black text-[#F5F5DC] rounded-full flex items-center justify-center text-2xl shadow-lg hover:scale-110 transition-transform"
+        className="fixed bottom-8 right-8 z-[60] w-12 h-12 bg-black text-[#F5F5DC] rounded-full flex items-center justify-center text-2xl shadow-lg hover:scale-110 transition-transform cursor-pointer"
         aria-label="About Motion Wave"
       >
         ?

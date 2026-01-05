@@ -39,13 +39,13 @@ export default function Home() {
       <div className="z-20 mt-8 flex gap-8">
         <button
           onClick={() => setSelectedHand('left')}
-          className="px-8 py-3 bg-black text-[#F5F5DC] text-xl rounded-2xl hover:scale-105 transition-transform"
+          className="px-8 py-3 bg-black text-[#F5F5DC] text-xl rounded-2xl hover:scale-105 transition-transform cursor-pointer"
         >
           Left Hand
         </button>
         <button
           onClick={() => setSelectedHand('right')}
-          className="px-8 py-3 bg-black text-[#F5F5DC] text-xl rounded-2xl hover:scale-105 transition-transform"
+          className="px-8 py-3 bg-black text-[#F5F5DC] text-xl rounded-2xl hover:scale-105 transition-transform cursor-pointer"
         >
           Right Hand
         </button>
@@ -70,7 +70,7 @@ export default function Home() {
       {/* About Modal & Toggle Button */}
       <button
         onClick={() => setIsAboutOpen(true)}
-        className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-black text-[#F5F5DC] rounded-full flex items-center justify-center text-2xl shadow-lg hover:scale-110 transition-transform"
+        className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-black text-[#F5F5DC] rounded-full flex items-center justify-center text-2xl shadow-lg hover:scale-110 transition-transform cursor-pointer"
         aria-label="About Motion Wave"
       >
         ?

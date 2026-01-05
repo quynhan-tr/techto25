@@ -27,7 +27,7 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
           <h2 className="text-4xl tracking-tight text-black">About Motion Wave</h2>
           <button
             onClick={onClose}
-            className="p-2 hover:opacity-60 transition-opacity text-2xl"
+            className="p-2 hover:opacity-60 transition-opacity text-2xl cursor-pointer"
             aria-label="Close modal"
           >
             ✕
@@ -67,7 +67,7 @@ export default function AboutModal({ isOpen, onClose }: AboutModalProps) {
         <div className="relative z-10 p-6 pt-0 flex justify-center">
           <button
             onClick={onClose}
-            className="px-8 py-3 bg-black text-[#F5F5DC] rounded-xl hover:scale-105 transition-transform"
+            className="px-8 py-3 bg-black text-[#F5F5DC] rounded-xl hover:scale-105 transition-transform cursor-pointer"
           >
             Got it
           </button>
