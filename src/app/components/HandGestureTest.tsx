@@ -458,8 +458,8 @@ export default function HandGestureTracker({ initialHandPreference, onBack }: Ha
               Make sure you&apos;ve granted camera permissions and are using HTTPS
             </p>
             <button
-              onClick={() => setHandPreference(null)}
-              className="px-8 py-4 bg-black text-[#F5F5DC] rounded-xl hover:scale-105 transition-transform"
+              onClick={onBack}
+              className="px-8 py-4 bg-black text-[#F5F5DC] rounded-xl hover:scale-105 transition-transform cursor-pointer"
             >
               Back to Hand Selection
             </button>
